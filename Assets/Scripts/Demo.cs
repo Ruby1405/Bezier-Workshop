@@ -11,6 +11,7 @@ public class Demo : MonoBehaviour
     [SerializeField] private Vector2 p2 = new Vector2(5, 0);
     [SerializeField] private Vector2 p3 = new Vector2(10, 5);
     [SerializeField][Range(0, 1)] private float t = 0.5f;
+    private bool isPlaying = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,7 +24,16 @@ public class Demo : MonoBehaviour
     {
         
     }
-
+    void Play()
+    {
+        MoveCar(0);
+        isPlaying = true;
+    }
+    void Stop()
+    {
+        isPlaying = false;
+        MoveCar(0);
+    }
     private void OnValidate()
     {
         PathChanged();
