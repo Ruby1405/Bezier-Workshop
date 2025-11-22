@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,6 +7,7 @@ public class Demo : MonoBehaviour
     [SerializeField] private Transform car;
     [SerializeField] private LineRenderer curveRenderer;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private List<Transform> markers;
     [SerializeField] private int segmentCount = 20;
     public Vector2 p0 = new Vector2(-5, 0);
     public Vector2 p1 = new Vector2(0, 5);
@@ -40,7 +42,6 @@ public class Demo : MonoBehaviour
     private void OnValidate()
     {
         PathChanged();
-        MoveCar(t);
         ValueChanged.Invoke();
     }
 
@@ -59,6 +60,13 @@ public class Demo : MonoBehaviour
         lineRenderer.SetPosition(2, new Vector3(p2.x, 0, p2.y));
         lineRenderer.SetPosition(3, new Vector3(p3.x, 0, p3.y));
 
+        if (markers.Count >= 4)
+        {
+            markers[0].position = new Vector3(p0.x, 0, p0.y);
+            markers[1].position = new Vector3(p1.x, 0, p1.y);
+            markers[2].position = new Vector3(p2.x, 0, p2.y);
+            markers[3].position = new Vector3(p3.x, 0, p3.y); 
+        }
 
         MoveCar(t);
     }
