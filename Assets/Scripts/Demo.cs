@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Demo : MonoBehaviour
 {
@@ -6,13 +7,15 @@ public class Demo : MonoBehaviour
     [SerializeField] private LineRenderer curveRenderer;
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private int segmentCount = 20;
-    [SerializeField] private Vector2 p0 = new Vector2(-5, 0);
-    [SerializeField] private Vector2 p1 = new Vector2(0, 5);
-    [SerializeField] private Vector2 p2 = new Vector2(5, 0);
-    [SerializeField] private Vector2 p3 = new Vector2(10, 5);
+    public Vector2 p0 = new Vector2(-5, 0);
+    public Vector2 p1 = new Vector2(0, 5);
+    public Vector2 p2 = new Vector2(5, 0);
+    public Vector2 p3 = new Vector2(10, 5);
     [SerializeField][Range(0, 1)] private float t = 0.5f;
-    private bool isPlaying = false;
 
+    [SerializeField] private UnityEvent ValueChanged;
+    private bool isPlaying = false;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -38,6 +41,7 @@ public class Demo : MonoBehaviour
     {
         PathChanged();
         MoveCar(t);
+        ValueChanged.Invoke();
     }
 
     void PathChanged()
